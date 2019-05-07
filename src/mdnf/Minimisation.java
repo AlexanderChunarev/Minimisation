@@ -18,6 +18,39 @@ public class Minimisation {
         array.addAll(Arrays.asList(function.split(" \\+ ")));
     }
 
+    private void minimise() {
+        for (int i = 0; i < array.size(); i++) {
+            if (forms[i].equals("AND_and_OR_NOT")) {
+                System.out.println("AND_and_OR_NOT: " + "!(" + function + ")");
+            }
+            if (forms[i].equals("AND_NO_and_AND")) {
+                StringBuilder func = new StringBuilder();
+                for (String s : array) {
+                    func.append("!(").append(s).append(") * ");
+                }
+                System.out.println("AND_NO_and_AND: " + func.substring(0, func.length() - 2).trim());
+            }
+            if (forms[i].equals("OR_and_AND")) {
+                StringBuilder func = new StringBuilder();
+                String value;
+                for (String expr : array) {
+                    value = getValue(expr);
+                    func.append("(").append(value.trim().replace(" ", "+")).append(")");
+                }
+                System.out.println("OR_and_AND: " + func);
+            }
+            if (forms[i].equals("OR_NOT_and_OR_NOT")) {
+                StringBuilder func = new StringBuilder();
+                String value;
+                for (String expr : array) {
+                    value = getValue(expr);
+                    func.append("!(").append(value.trim().replace(" ", "+")).append(")+");
+                }
+                System.out.println("OR_NOT_and_OR_NOT: " + "!(" + func.substring(0, func.length() - 1) + ")");
+            }
+        }
+    }
+
     private String getValue(String expr) {
         String value;
         value = "";

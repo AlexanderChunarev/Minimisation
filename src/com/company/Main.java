@@ -44,9 +44,10 @@ public class Main extends JFrame {
         Line2D line1 = new Line2D.Double();
         Line2D line2 = new Line2D.Double();
         line1.setLine(CENTER_X, CENTER_Y, firstLine.getY2(), Math.abs(firstLine.getX1() - firstLine.getX2() + firstLine.getY1()));
-        line2.setLine(CENTER_X, CENTER_Y, secondLine.getX1() - secondLine.getY2() + secondLine.getX1(), secondLine.getX2()); // 2 line
+        line2.setLine(CENTER_X, CENTER_Y, secondLine.getX1() - secondLine.getY2() + secondLine.getX1(), secondLine.getX2());
         g2.draw(line1);
         g2.draw(line2);
+        System.out.println(angleBetween2Lines(secondLine, line2));
     }
 
     public static double angleBetween2Lines(Line2D line1, Line2D line2) {
